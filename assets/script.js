@@ -1,9 +1,18 @@
 //declares entire quiz container
 var quiz = document.querySelector('#quiz');
+//declares where questions will be placed
+var questionPlace = document.querySelector('#question-prompt')
+// declares button for the first anwser
+var anw1 = document.querySelector('#anwBtn-1')
+// declares button for the seconds anwser
+var anw2 = document.querySelector('#anwBtn-2')
+// declares button for the third anwser
+var anw3 = document.querySelector('#anwBtn-3')
+// declares button for the fourth anwser
+var anw4 = document.querySelector('#anwBtn-4')
 
 
-
-// identifies Button for 
+// identifies the start quiz button
 var startBtn = document.querySelector("#start-quiz");
 var timeBtn = document.querySelector('#time')
 var scoreboardButton = document.querySelector('#scoreboard-button') 
