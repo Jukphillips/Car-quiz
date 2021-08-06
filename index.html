@@ -8,21 +8,30 @@
     <link rel="style-sheet" href="./assets/style.css">
 </head>
 <body>
-    <p id=scoreboard-button>View ScoreBoard</p>
+    <button id=scoreboard-button>View ScoreBoard</Button>
+        <div id=leaderboard></div>
     <p id="time"></p>
-   <div id="quiz"></div> 
-   <main id="first-page">
-     <h1 id="first-page-title">The Ultimate Car Quiz</h1>
-     <h5 id="first-page-welcome">Welcome to the Ultimate Car Quiz! This tiny quiz has been designed to test your car skills. Do you think you know everything about cars?
-         I guess we'll find out!
-     </h5>
-     <p id="rules"><strong>The rules of the game:</strong> You must anwser ten challenging questions about cars in under 100 seconds. Doesn't sound challenging right? Well 
-    each question you get wrong, deducts ten seconds from your total time! If you can't anwser all of them correctly in the given time you fail the game
-    Still don't think it's challenging? Well let's see what you got! Press the "Start Quiz" button to begin!   
-    </p>
-     <button id="start-quiz">Start Quiz</button>
-</main>
-<div id="results"></div>
+        <div id="quiz">
+            <ul id = "question-prompt">
+                <li> <button id="anwBtn-1"></button></li>
+                <li> <button id="anwBtn-2"></button></li>
+                <li> <button id="anwBtn-3"></button></li>
+                <li> <button id="anwBtn-4"></button></li>
+            </ul>
+
+        </div> 
+        <main id="first-page">
+            <h1 id="first-page-title">The Ultimate Car Quiz</h1>
+            <h5 id="first-page-welcome">Welcome to the Ultimate Car Quiz! This tiny quiz has been designed to test your car skills. Do you think you know everything about cars?
+                I guess we'll find out!
+            </h5>
+            <p id="rules"><strong>The rules of the game:</strong> You must anwser ten challenging questions about cars in under 100 seconds. Doesn't sound challenging right? Well 
+            each question you get wrong, deducts ten seconds from your total time! If you can't anwser all of them correctly in the given time you fail the game
+            Still don't think it's challenging? Well let's see what you got! Press the "Start Quiz" button to begin!   
+            </p>
+        <button id="start-quiz">Start Quiz</button>
+        </main> 
+        <div id="results"></div>
 
 <script src="assets/script.js"></script>
 </body>
