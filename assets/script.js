@@ -88,11 +88,23 @@ function startgame (event) {
     firstWelcome.textContent = "";
     rulesDesc.textContent = "";
     startBtn.parentNode.remove(); 
-    // timer(); 
+    timer(); 
     quizQuestions();
 
     
 };
+
+function timer() {
+    let timerInterval = setInterval(function () {
+        timescore--;
+        timeBtn.textContent = `Time:${timescore}s`;
+
+        if (timescore === 0 || i === questions.length) {
+            clearInterval(timerInterval);
+            
+        }
+    }, 1000);
+}
 
 
 function score() {
@@ -111,7 +123,7 @@ var test = document.getElementById("test")
 function quizQuestions(){
     quiz.style.display = "block";
     
-    if (questionCount < questions.length ) {
+    if (i < questions.length ) {
         questionPlace.textContent = questions[i].Question;
         anw1.textContent = questions[i].answers[0];
         anw2.textContent = questions[i].answers[1];
@@ -123,7 +135,7 @@ function quizQuestions(){
     function checkAnwser(event) {
 
         setTimeout(function(){
-            feedback.style.display = 'none';
+            feedback.textContent = '';
         }, 1000);
 
         if(event === questions[i].correctAnswer  ) {
@@ -134,13 +146,11 @@ function quizQuestions(){
             feedback.textContent = "Correct!"
     } else if (event === questions[i].correctAnswer) {
             feedback.textContent = "Correct!"
-    } else if (questionCount > questions.length) {
+    } else if (i = questions.length) {
         alert("Game over")
     } else {
         feedback.textContent = "wrong"
         timescore - 7;
-
-
     }
         i++;
         quizQuestions();
