@@ -12,7 +12,8 @@ var firstWelcome = document.querySelector('#first-page-welcome')
 var rulesDesc = document.querySelector('#rules')
 //declares where feeback will be injected onto the page
 var feedback = document.querySelector('#feedback')
-
+// declares where are score will be displayed at the end of the quiz
+var scoreEnd = document.querySelector('#scoreEnd')
 
 // identifies the start quiz button
 var startBtn = document.querySelector("#start-quiz");
@@ -26,17 +27,18 @@ var anw3 = document.querySelector('#anwBtn-3')
 var anw4 = document.querySelector('#anwBtn-4')
 // declares button for the scoreboard
 var scoreboardButton = document.querySelector('#scoreboard-button') 
-//
-var ButtonCss = document.querySelector('.buttonCss')
+
 
 
 
 // var declaring the inital value of time
-var timescore = 70;
+var timescore = 75;
 // var declaring question count
 var questionCount = 0;
 // var declaring i in global scope
 var i = 0;
+// declaring our score value
+var score = timescore;
 
 
 // declares our questions, anwser choices, and anwsers
@@ -101,20 +103,13 @@ function timer() {
 
         if (timescore === 0 || i === questions.length) {
             clearInterval(timerInterval);
-            
+            gameOver();
         }
     }, 1000);
 }
 
 
-function score() {
 
-    landingTitle.textContent = "";
-    firstWelcome.textContent = "";
-    rulesDesc.textContent = "";
-    startBtn.parentNode.remove();
-
-}
 var leaderboards = function() {
 
 }
@@ -131,7 +126,7 @@ function quizQuestions(){
         anw4.textContent = questions[i].answers[3];
     }
 }
-    
+    console.log(questions.length)
     function checkAnwser(event) {
 
         setTimeout(function(){
@@ -146,21 +141,30 @@ function quizQuestions(){
             feedback.textContent = "Correct!"
     } else if (event === questions[i].correctAnswer) {
             feedback.textContent = "Correct!"
-    } else if (i = questions.length) {
-        alert("Game over")
+    } else if (i == 8) {
+        gameOver();
     } else {
-        feedback.textContent = "wrong"
-        timescore - 7;
+        feedback.textContent = "Wrong!"
+        timescore = timescore - 7;
+        
     }
         i++;
         quizQuestions();
     }
 
-console.log(questions[1].Question)
+    function gameOver() {
+        quiz.style.display = "none";
+        gameEnd.style.display ="block";
+        scoreEnd.textContent = "Your score is: " + timescore; 
+
+    }
 
 
 
-scoreboardButton.addEventListener('click', score)
+// scoreboardButton.addEventListener('click', score)
+
+
+
 startBtn.addEventListener('click', startgame); 
 
 // adds event listner for first anwser button
