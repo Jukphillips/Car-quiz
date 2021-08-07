@@ -14,6 +14,10 @@ var rulesDesc = document.querySelector('#rules')
 var feedback = document.querySelector('#feedback')
 // declares where are score will be displayed at the end of the quiz
 var scoreEnd = document.querySelector('#scoreEnd')
+//
+var initialsUser = document.querySelector('#initialinput')
+
+
 
 // identifies the start quiz button
 var startBtn = document.querySelector("#start-quiz");
@@ -26,7 +30,9 @@ var anw3 = document.querySelector('#anwBtn-3')
 // declares button for the fourth anwser
 var anw4 = document.querySelector('#anwBtn-4')
 // declares button for the scoreboard
-var scoreboardButton = document.querySelector('#scoreboard-button') 
+var scoreboardButton = document.querySelector('#scoreboard-button')
+//
+var resultSubmit = document.querySelector('#results') 
 
 
 
@@ -39,7 +45,8 @@ var questionCount = 0;
 var i = 0;
 // declaring our score value
 var score = timescore;
-
+// declaring array of scores
+var scoreList = [];
 
 // declares our questions, anwser choices, and anwsers
 var questions = [
@@ -76,10 +83,6 @@ var questions = [
         answers: ["Rinspeed Oasis","Porshce 911","Tesla Roadster", "Rolls Royce vision 100"],
         correctAnswer: "Tesla Roadster" 
     }, ]
-    console.log(questions[1].Question)
-    console.log(questions[1].answers[0])
-    
-
 
 
 timeBtn.textContent = "Time: " + timescore
@@ -111,10 +114,15 @@ function timer() {
 
 
 var leaderboards = function() {
+    quiz.style.display  = "none"
+    landingTitle.style.display = "none"
+    startBtn.style.display = "none"
+    firstWelcome.style.display = "none"
+    rulesDesc.style.display = "none"
+    gameEnd.style.display
 
 }
 
-var test = document.getElementById("test")
 function quizQuestions(){
     quiz.style.display = "block";
     
@@ -126,8 +134,8 @@ function quizQuestions(){
         anw4.textContent = questions[i].answers[3];
     }
 }
-    console.log(questions.length)
-    function checkAnwser(event) {
+    
+function checkAnwser(event) {
 
         setTimeout(function(){
             feedback.textContent = '';
@@ -152,11 +160,15 @@ function quizQuestions(){
         quizQuestions();
     }
 
-    function gameOver() {
+function gameOver() {
         quiz.style.display = "none";
         gameEnd.style.display ="block";
         scoreEnd.textContent = "Your score is: " + timescore; 
-
+        var userResults = {
+            initialsUser: initialsUser.value.trim(),
+            score: score.value
+        };
+        localStorage.setItem("userResult", JSON.stringify(userResults));
     }
 
 
@@ -187,3 +199,4 @@ anw4.addEventListener("click", function (event) {
   var event = event.target;
   checkAnwser(event.textContent.trim());
 });
+resultSubmit.addEventListener('click', leaderboards)

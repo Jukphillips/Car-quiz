@@ -13,8 +13,14 @@
      <p id="time"></p>
     </div>
         <div id='leaderboard'>
-
+            <h3>High Scores</h3>
+            <div id="scoreList"></div>
+            <div>
+                <button>Go back</button>
+                <button>Clear score</button>
+            </div>
         </div>
+        
         <div id="quiz">
             <h3 id="question-prompt"></h3>
             <ul class='quizFormat'> 
@@ -37,15 +43,15 @@
         <button id="start-quiz">Start Quiz</button>
         </main> 
         <div id="gameEnd">
-            <h1>ALL Done!</h1>
+            <h1>All Done!</h1>
             <h3></h3>
             <p id="scoreEnd"></p>
             <p>
                 Enter Your Intials: 
                <span>
-                   <input placeholder="Intials" > 
+                   <input placeholder="Intials" id="initialinput" > 
                </span> 
-               <button> Submit </button>
+               <button id="results"> Submit </button>
             </p>
         </div>
 
