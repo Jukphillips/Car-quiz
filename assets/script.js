@@ -15,7 +15,13 @@ var feedback = document.querySelector('#feedback')
 // declares where are score will be displayed at the end of the quiz
 var scoreEnd = document.querySelector('#scoreEnd')
 //
-var initialsUser = document.querySelector('#initialinput')
+
+//
+var highScores = document.querySelector('#leaderboard')
+//
+var firstpage = document.querySelector('#first-page')
+//
+var scoreList = document.querySelector('#scoreList')
 
 
 
@@ -33,14 +39,14 @@ var anw4 = document.querySelector('#anwBtn-4')
 var scoreboardButton = document.querySelector('#scoreboard-button')
 //
 var resultSubmit = document.querySelector('#results') 
+// declares back button
+var goBack = document.querySelector('#goBack')
 
 
 
 
 // var declaring the inital value of time
 var timescore = 75;
-// var declaring question count
-var questionCount = 0;
 // var declaring i in global scope
 var i = 0;
 // declaring our score value
@@ -113,14 +119,29 @@ function timer() {
 
 
 
-var leaderboards = function() {
-    quiz.style.display  = "none"
-    landingTitle.style.display = "none"
-    startBtn.style.display = "none"
-    firstWelcome.style.display = "none"
-    rulesDesc.style.display = "none"
-    gameEnd.style.display
+function leaderboards() {
 
+
+    quiz.style.display  = "none"
+    firstpage.style.display = "none"
+    gameEnd.style.display = "none"
+    highScores.style.display = "block"
+    
+   var initialsUser = document.getElementById('initialinput').value;
+        console.log(initialsUser)
+
+    
+    let listScores = document.createElement('li')
+    listScores.textContent = initialsUser.toUpperCase() + " : " + timescore;
+    document.querySelector('#scoreList').appendChild(listScores)
+    
+    var userResults = {
+        initialsUser: initialsUser,
+        score: timescore
+    }
+
+    localStorage.setItem("userResult", JSON.stringify(userResults));
+    document.querySelector('scoreList') = JSON.parse(localStorage.getItem("userResult"));
 }
 
 function quizQuestions(){
@@ -149,7 +170,7 @@ function checkAnwser(event) {
             feedback.textContent = "Correct!"
     } else if (event === questions[i].correctAnswer) {
             feedback.textContent = "Correct!"
-    } else if (i == 8) {
+    } else if (i == 7) {
         gameOver();
     } else {
         feedback.textContent = "Wrong!"
@@ -163,15 +184,12 @@ function checkAnwser(event) {
 function gameOver() {
         quiz.style.display = "none";
         gameEnd.style.display ="block";
-        scoreEnd.textContent = "Your score is: " + timescore; 
-        var userResults = {
-            initialsUser: initialsUser.value.trim(),
-            score: score.value
-        };
-        localStorage.setItem("userResult", JSON.stringify(userResults));
+        scoreEnd.textContent = "Your score is: " + timescore;
+        
+        
     }
 
-
+  
 
 // scoreboardButton.addEventListener('click', score)
 
@@ -199,4 +217,9 @@ anw4.addEventListener("click", function (event) {
   var event = event.target;
   checkAnwser(event.textContent.trim());
 });
-resultSubmit.addEventListener('click', leaderboards)
+resultSubmit.addEventListener('click', leaderboards);
+
+goBack.addEventListener('click', function(){
+    location.reload();
+
+})
