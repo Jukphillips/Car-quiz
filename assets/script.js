@@ -2,6 +2,19 @@
 var quiz = document.querySelector('#quiz');
 //declares where questions will be placed
 var questionPlace = document.querySelector('#question-prompt')
+// delcares the time variable
+var timeBtn = document.querySelector('#time')
+// declares landing page title "The Ultimate Car Quiz"
+var landingTitle = document.querySelector('#first-page-title')
+// delcares landing page introduction
+var firstWelcome = document.querySelector('#first-page-welcome')
+// declares where rules are at on the landing page
+var rulesDesc = document.querySelector('#rules')
+
+
+
+// identifies the start quiz button
+var startBtn = document.querySelector("#start-quiz");
 // declares button for the first anwser
 var anw1 = document.querySelector('#anwBtn-1')
 // declares button for the seconds anwser
@@ -10,54 +23,20 @@ var anw2 = document.querySelector('#anwBtn-2')
 var anw3 = document.querySelector('#anwBtn-3')
 // declares button for the fourth anwser
 var anw4 = document.querySelector('#anwBtn-4')
-
-
-// identifies the start quiz button
-var startBtn = document.querySelector("#start-quiz");
-var timeBtn = document.querySelector('#time')
+// declares button for the scoreboard
 var scoreboardButton = document.querySelector('#scoreboard-button') 
-var landingTitle = document.querySelector('#first-page-title')
-var firstWelcome = document.querySelector('#first-page-welcome')
-var rulesDesc = document.querySelector('#rules')
 
+// var declaring the inital value of time
 var timescore = 70;
+// var declaring question count
+var questionCount = 0;
 
 
-
-
-timeBtn.textContent = "Time: " + timescore
-
-
-var startgame = function(event){
-    event.preventDefault();
-    landingTitle.textContent = "";
-    firstWelcome.textContent = "";
-    rulesDesc.textContent = "";
-    startBtn.parentNode.remove();
-    
-    quizQuestions();
-
-    
-}
-
-
-var score = function(scoreevent) {
-    scoreevent.preventDefault();
-    landingTitle.textContent = "";
-    firstWelcome.textContent = "";
-    rulesDesc.textContent = "";
-    startBtn.parentNode.remove();
-
-}
-var leaderboards = function(scoreevent) {
-
-}
-
-var quizQuestions = function(event){
-    var questions = [
+// declares our questions, anwser choices, and anwsers
+var questions = [
  {
      Question: "Which animal features in the logo for the Lamborghini?",
-      answers: ["1.Horse","2.Jaguar","3.Bull", "4.Girrafe" ],
+      answers: ["Horse","Jaguar","Bull", "Girrafe" ],
      correctAnswer: "Bull"
     }, {
         Question: "What was the original color for all Ferrari Models?",
@@ -81,23 +60,64 @@ var quizQuestions = function(event){
         correctAnswer: "Ford Mustang"
     }, {
         Question: "What was the first Japanese car to be produced in the United States?",
-        answers: {a: "Nissan Maxima", b: "Mazda Miata", c: "Toyota Camry", d: "Honda Accord"},
+        answers: ["Nissan Maxima","Mazda Miata","Toyota Camry","Honda Accord"],
         correctAnswer: 'Honda Accord' 
     }, {
         Question: "What was the first car launched into space?",
-        answers: {a: "Rinspeed Oasis", b: "Porshce 911", c: "Tesla Roadster", d:  "Rolls Royce vision 100"},
+        answers: ["Rinspeed Oasis","Porshce 911","Tesla Roadster", "Rolls Royce vision 100"],
         correctAnswer: "Tesla Roadster" 
     }, ]
     console.log(questions[1].Question)
-    console.log(questions[1].answers.length)
+    console.log(questions[1].answers[0])
     
-    for( var i= 0; i < questions.length; ) {
-        
-    }
+
+
+
+timeBtn.textContent = "Time: " + timescore
+
+
+function startgame (event) {
+    landingTitle.textContent = "";
+    firstWelcome.textContent = "";
+    rulesDesc.textContent = "";
+    startBtn.parentNode.remove();  
+    quizQuestions();
+
+    
+};
+
+
+function score(scoreevent) {
+
+    landingTitle.textContent = "";
+    firstWelcome.textContent = "";
+    rulesDesc.textContent = "";
+    startBtn.parentNode.remove();
+
+}
+var leaderboards = function(scoreevent) {
 
 }
 
+var test = document.getElementById("test")
+function quizQuestions(){
+    quiz.style.display = "block";
+    
+    if (questionCount < questions.length ) {
+        questionPlace.textContent = questions[1].Question;
+        anw1.innerHTML = questions[1].answers[0];
+        anw2.textContent = questions[1].answers[1];
+        anw3.textContent = questions[1].answers[2];
+        anw4.textContent = questions[1].answers[3];
 
+
+    }
+
+
+
+}
+
+console.log(questions[1].Question)
 
 
 
