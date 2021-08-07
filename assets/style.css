@@ -1,3 +1,22 @@
+#constantVariables {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
 #quiz {
   display: none;
+  text-align: center;
+}
+
+.buttonCss {
+  background-color: purple;
+  border: none;
+  border-radius: 10px;
+  color: white;
+}
+
+.quizFormat li {
+  list-style-type: none;
+  justify-content: center;
 }

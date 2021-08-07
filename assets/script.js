@@ -102,13 +102,13 @@ var leaderboards = function(scoreevent) {
 var test = document.getElementById("test")
 function quizQuestions(){
     quiz.style.display = "block";
-    
+    var i = 0;
     if (questionCount < questions.length ) {
-        questionPlace.textContent = questions[1].Question;
-        anw1.innerHTML = questions[1].answers[0];
-        anw2.textContent = questions[1].answers[1];
-        anw3.textContent = questions[1].answers[2];
-        anw4.textContent = questions[1].answers[3];
+        questionPlace.textContent = questions[i].Question;
+        anw1.innerHTML = questions[i].answers[0];
+        anw2.textContent = questions[i].answers[1];
+        anw3.textContent = questions[i].answers[2];
+        anw4.textContent = questions[i].answers[3];
 
 
     }
