@@ -10,7 +10,8 @@ var landingTitle = document.querySelector('#first-page-title')
 var firstWelcome = document.querySelector('#first-page-welcome')
 // declares where rules are at on the landing page
 var rulesDesc = document.querySelector('#rules')
-
+//declares where feeback will be injected onto the page
+var feedback = document.querySelector('#feedback')
 
 
 // identifies the start quiz button
@@ -121,20 +122,28 @@ function quizQuestions(){
     
     function checkAnwser(event) {
 
-
-      
-
+        setTimeout(function(){
+            feedback.style.display = 'none';
+        }, 1000);
 
         if(event === questions[i].correctAnswer  ) {
-            alert('you did it')
+            feedback.textContent = "Correct!"
         } else if (event === questions[i].correctAnswer) {
-            alert('you did it')
+            feedback.textContent = "Correct!"
     } else if (event === questions[i].correctAnswer) {
-            alert('you did it')
+            feedback.textContent = "Correct!"
     } else if (event === questions[i].correctAnswer) {
-            alert('you did it')
-    }
+            feedback.textContent = "Correct!"
+    } else if (questionCount > questions.length) {
+        alert("Game over")
+    } else {
+        feedback.textContent = "wrong"
+        timescore - 7;
 
+
+    }
+        i++;
+        quizQuestions();
     }
 
 console.log(questions[1].Question)
@@ -144,19 +153,22 @@ console.log(questions[1].Question)
 scoreboardButton.addEventListener('click', score)
 startBtn.addEventListener('click', startgame); 
 
-
+// adds event listner for first anwser button
 anw1.addEventListener("click", function (event) {
   var event = event.target;
   checkAnwser(event.textContent.trim());
 });
+// adds event listner for second anwser button
 anw2.addEventListener("click", function (event) {
   var event = event.target;
   checkAnwser(event.textContent.trim());
 });
+// adds event listner for third anwser button
 anw3.addEventListener("click", function (event) {
   var event = event.target;
   checkAnwser(event.textContent.trim());
 });
+// adds event listner for fourth anwser button
 anw4.addEventListener("click", function (event) {
   var event = event.target;
   checkAnwser(event.textContent.trim());
