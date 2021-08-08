@@ -15,13 +15,11 @@ var feedback = document.querySelector('#feedback')
 // declares where are score will be displayed at the end of the quiz
 var scoreEnd = document.querySelector('#scoreEnd')
 //
-
-//
 var highScores = document.querySelector('#leaderboard')
 //
 var firstpage = document.querySelector('#first-page')
 //
-var scoreList = document.querySelector('#scoreList')
+var scoreListText = document.querySelector('#scoreList')
 
 
 
@@ -41,6 +39,8 @@ var scoreboardButton = document.querySelector('#scoreboard-button')
 var resultSubmit = document.querySelector('#results') 
 // declares back button
 var goBack = document.querySelector('#goBack')
+// declares scoreboard button
+var viewScore = document.querySelector('#scoreboard-button')
 
 
 
@@ -53,6 +53,8 @@ var i = 0;
 var score = timescore;
 // declaring array of scores
 var scoreList = [];
+
+var score;
 
 // declares our questions, anwser choices, and anwsers
 var questions = [
@@ -91,7 +93,7 @@ var questions = [
     }, ]
 
 
-timeBtn.textContent = "Time: " + timescore
+timeBtn.textContent = "Time: " + timescore + "s"
 
 
 function startgame (event) {
@@ -119,30 +121,49 @@ function timer() {
 
 
 
-function leaderboards() {
-
+function leaderboards(event) {
+    event.preventDefault();
 
     quiz.style.display  = "none"
     firstpage.style.display = "none"
     gameEnd.style.display = "none"
     highScores.style.display = "block"
+
+
     
    var initialsUser = document.getElementById('initialinput').value;
-        console.log(initialsUser)
+   scoreList.push({initialsUser, score: score}) 
+   
+   scoreList = scoreList.sort((a, b) => {
+        if (a.score < b.score) {
+          return 1;
+        } else {
+          return -1;
+        }
+      });
 
+        scoreListText.textContent="";
+ 
+
+    for (let i = 0; i < scoreList.length; i++) {
+        let listScores = document.createElement("li");
+        listScores.textContent = `${scoreList[i].initialsUser} : ${scoreList[i].score}`;
+        scoreListText.appendChild(listScores)
     
-    let listScores = document.createElement('li')
-    listScores.textContent = initialsUser.toUpperCase() + " : " + timescore;
-    document.querySelector('#scoreList').appendChild(listScores)
-    
-    var userResults = {
-        initialsUser: initialsUser,
-        score: timescore
     }
 
-    localStorage.setItem("userResult", JSON.stringify(userResults));
-    document.querySelector('scoreList') = JSON.parse(localStorage.getItem("userResult"));
+    localStorage.setItem("scoreList", JSON.stringify(scoreList));
+let storedScoreList = JSON.parse(localStorage.getItem("scoreList"));
+    if (storedScoreList !== null) {
+        scoreList += storedScoreList;
+    }
+  
 }
+
+
+
+
+
 
 function quizQuestions(){
     quiz.style.display = "block";
@@ -155,7 +176,8 @@ function quizQuestions(){
         anw4.textContent = questions[i].answers[3];
     }
 }
-    
+ 
+
 function checkAnwser(event) {
 
         setTimeout(function(){
@@ -179,15 +201,15 @@ function checkAnwser(event) {
     }
         i++;
         quizQuestions();
-    }
+}
+
 
 function gameOver() {
         quiz.style.display = "none";
         gameEnd.style.display ="block";
         scoreEnd.textContent = "Your score is: " + timescore;
-        
-        
-    }
+        score = timescore
+}
 
   
 
@@ -223,3 +245,4 @@ goBack.addEventListener('click', function(){
     location.reload();
 
 })
+viewScore.addEventListener('click', leaderboards)
