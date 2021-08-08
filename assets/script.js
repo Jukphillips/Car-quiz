@@ -145,15 +145,15 @@ function leaderboards(event) {
         scoreListText.textContent="";
  
 
-    for (let i = 0; i < scoreList.length; i++) {
-        let listScores = document.createElement("li");
-        listScores.textContent = `${scoreList[i].initialsUser} : ${scoreList[i].score}`;
+    for (var i = 0; i < scoreList.length; i++) {
+        var listScores = document.createElement("li");
+        listScores.textContent = scoreList[i].initialsUser + ":" + scoreList[i].score;
         scoreListText.appendChild(listScores)
     
     }
 
     localStorage.setItem("scoreList", JSON.stringify(scoreList));
-let storedScoreList = JSON.parse(localStorage.getItem("scoreList"));
+var storedScoreList = JSON.parse(localStorage.getItem("scoreList"));
     if (storedScoreList !== null) {
         scoreList += storedScoreList;
     }
