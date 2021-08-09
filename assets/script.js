@@ -54,7 +54,7 @@ var score = timescore;
 // declaring array of scores
 var scoreList = [];
 
-var score;
+
 
 // declares our questions, anwser choices, and anwsers
 var questions = [
@@ -119,48 +119,45 @@ function timer() {
     }, 1000);
 }
 
-
+function saveScore(event) {
+    var initialsUser = document.getElementById('initialinput').value;
+   
+        scoreList.push({initialsUser: initialsUser, score: timescore})
+        console.log(scoreList)
+        localStorage.setItem("scoreList", JSON.stringify(scoreList));
+        leaderboards(event);
+}
 
 function leaderboards(event) {
     event.preventDefault();
+    scoreListText.textContent = "";
 
     quiz.style.display  = "none"
     firstpage.style.display = "none"
     gameEnd.style.display = "none"
     highScores.style.display = "block"
-
-
     
-   var initialsUser = document.getElementById('initialinput').value;
-   scoreList.push({initialsUser, score: score}) 
-   
-   scoreList = scoreList.sort((a, b) => {
-        if (a.score < b.score) {
-          return 1;
-        } else {
-          return -1;
-        }
-      });
+    var storedscoreList = JSON.parse(localStorage.getItem('scoreList'))
+    if( storedscoreList !== null){
+        scoreList = storedscoreList;
+    }
 
-        scoreListText.textContent="";
- 
+
 
     for (var i = 0; i < scoreList.length; i++) {
+    
+      
         var listScores = document.createElement("li");
-        listScores.textContent = scoreList[i].initialsUser + ":" + scoreList[i].score;
+        listScores.textContent = scoreList[i].initialsUser + ":" +  scoreList[i].score;
         scoreListText.appendChild(listScores)
+    
+    
     
     }
 
-    localStorage.setItem("scoreList", JSON.stringify(scoreList));
-var storedScoreList = JSON.parse(localStorage.getItem("scoreList"));
-    if (storedScoreList !== null) {
-        scoreList += storedScoreList;
-    }
+    
   
 }
-
-
 
 
 
@@ -208,14 +205,12 @@ function gameOver() {
         quiz.style.display = "none";
         gameEnd.style.display ="block";
         scoreEnd.textContent = "Your score is: " + timescore;
-        score = timescore
+        var score = timescore
+       
+        
 }
 
   
-
-// scoreboardButton.addEventListener('click', score)
-
-
 
 startBtn.addEventListener('click', startgame); 
 
@@ -239,7 +234,7 @@ anw4.addEventListener("click", function (event) {
   var event = event.target;
   checkAnwser(event.textContent.trim());
 });
-resultSubmit.addEventListener('click', leaderboards);
+resultSubmit.addEventListener('click', saveScore);
 
 goBack.addEventListener('click', function(){
     location.reload();

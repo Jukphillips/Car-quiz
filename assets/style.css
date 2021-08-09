@@ -45,3 +45,7 @@ body {
 #leaderboard {
   text-align: center;
 }
+
+#scoreList {
+  list-style-type: none;
+}
