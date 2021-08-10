@@ -41,6 +41,8 @@ var resultSubmit = document.querySelector('#results')
 var goBack = document.querySelector('#goBack')
 // declares scoreboard button
 var viewScore = document.querySelector('#scoreboard-button')
+// delcares clear score button
+var clearHighScore = document.querySelector('#clearScore')
 
 
 
@@ -121,12 +123,19 @@ function timer() {
 
 function saveScore(event) {
     var initialsUser = document.getElementById('initialinput').value;
-   
+        var storedscoreList = JSON.parse(localStorage.getItem('scoreList'))
+    
+    if( storedscoreList !== null){
+        scoreList = storedscoreList;
+    }
+
         scoreList.push({initialsUser: initialsUser, score: timescore})
         console.log(scoreList)
         localStorage.setItem("scoreList", JSON.stringify(scoreList));
         leaderboards(event);
 }
+
+
 
 function leaderboards(event) {
     event.preventDefault();
@@ -136,31 +145,14 @@ function leaderboards(event) {
     firstpage.style.display = "none"
     gameEnd.style.display = "none"
     highScores.style.display = "block"
-    
-    var storedscoreList = JSON.parse(localStorage.getItem('scoreList'))
-    if( storedscoreList !== null){
-        scoreList = storedscoreList;
-    }
-
 
 
     for (var i = 0; i < scoreList.length; i++) {
-    
-      
         var listScores = document.createElement("li");
         listScores.textContent = scoreList[i].initialsUser + ":" +  scoreList[i].score;
         scoreListText.appendChild(listScores)
-    
-    
-    
     }
-
-    
-  
 }
-
-
-
 
 function quizQuestions(){
     quiz.style.display = "block";
@@ -205,15 +197,12 @@ function gameOver() {
         quiz.style.display = "none";
         gameEnd.style.display ="block";
         scoreEnd.textContent = "Your score is: " + timescore;
-        var score = timescore
-       
-        
+        var score = timescore  
 }
 
   
-
+// adds event listener for game to start
 startBtn.addEventListener('click', startgame); 
-
 // adds event listner for first anwser button
 anw1.addEventListener("click", function (event) {
   var event = event.target;
@@ -234,10 +223,20 @@ anw4.addEventListener("click", function (event) {
   var event = event.target;
   checkAnwser(event.textContent.trim());
 });
+//adds listener for when user enters their initial and saves that data
 resultSubmit.addEventListener('click', saveScore);
 
+//adds listener so computer can go back 
 goBack.addEventListener('click', function(){
     location.reload();
 
 })
+// adds button listener so user can view their localstorage high scores
 viewScore.addEventListener('click', leaderboards)
+// adds button listener so user can clear their highscores
+clearHighScore.addEventListener('click', function(){
+    localStorage.clear();
+    scoreListText.textContent = "";
+    scoreList = [];
+
+})
